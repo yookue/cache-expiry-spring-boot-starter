@@ -1,0 +1,20 @@
+# Cache Expiry for Spring Boot Starter
+# Copyright (c) 2020 Yookue Ltd. All rights reserved.
+# https://yookue.com
+
+
+spring:
+    cache:
+        type: redis
+    data:
+        redis:
+            repositories:
+                enabled: false
+    redis:
+        host: 'localhost'
+        port: 6379
+    cache-expiry:
+        cache-interceptor:
+            inject-cache-manager: true
+        cache-manager:
+            detect-cache-manager: true
