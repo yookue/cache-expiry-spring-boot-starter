@@ -8,11 +8,10 @@ spring:
         type: redis
     data:
         redis:
+            host: 'localhost'
+            port: 6379
             repositories:
                 enabled: false
-    redis:
-        host: 'localhost'
-        port: 6379
     cache-expiry:
         cache-interceptor:
             inject-cache-manager: true

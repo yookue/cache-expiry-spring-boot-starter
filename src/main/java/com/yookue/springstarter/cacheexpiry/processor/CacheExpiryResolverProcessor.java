@@ -17,7 +17,6 @@
 package com.yookue.springstarter.cacheexpiry.processor;
 
 
-import javax.annotation.Nonnull;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
@@ -40,9 +39,9 @@ import com.yookue.springstarter.cacheexpiry.config.CacheExpiryAutoConfiguration;
 import com.yookue.springstarter.cacheexpiry.property.CacheExpiryProperties;
 import com.yookue.springstarter.cacheexpiry.resolver.ExpiryCacheResolver;
 import com.yookue.springstarter.cacheexpiry.resolver.impl.CaffeineExpiryCacheResolver;
-import com.yookue.springstarter.cacheexpiry.resolver.impl.EhcacheExpiryCacheResolver;
 import com.yookue.springstarter.cacheexpiry.resolver.impl.JcacheExpiryCacheResolver;
 import com.yookue.springstarter.cacheexpiry.resolver.impl.RedisExpiryCacheResolver;
+import jakarta.annotation.Nonnull;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -54,7 +53,6 @@ import lombok.Setter;
  * @author David Hsing
  */
 @RequiredArgsConstructor
-@SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 public class CacheExpiryResolverProcessor implements BeanFactoryAware, BeanPostProcessor, InitializingBean, Ordered {
     private final CacheExpiryProperties expiryProperties;
     private final CacheManagerType managerType;
@@ -108,25 +106,7 @@ public class CacheExpiryResolverProcessor implements BeanFactoryAware, BeanPostP
             }
         }
         if (cacheInterceptor != null && cacheManager != null) {
-            CacheExpiryProperties.CacheResolver resolverProps = expiryProperties.getCacheResolver();
-            ExpiryCacheResolver resolver;
-            switch (managerType) {
-                case CAFFEINE:
-                    resolver = new CaffeineExpiryCacheResolver(cacheManager, BooleanUtils.isNotFalse(resolverProps.getDetectCacheNameResolver()));
-                    break;
-                case EHCACHE:
-                    resolver = new EhcacheExpiryCacheResolver(cacheManager, BooleanUtils.isNotFalse(resolverProps.getDetectCacheNameResolver()));
-                    break;
-                case JCACHE:
-                    resolver = new JcacheExpiryCacheResolver(cacheManager, BooleanUtils.isNotFalse(resolverProps.getDetectCacheNameResolver()));
-                    break;
-                case REDIS:
-                    resolver = new RedisExpiryCacheResolver(cacheManager, BooleanUtils.isNotFalse(resolverProps.getDetectCacheNameResolver()));
-                    break;
-                default:
-                    throw new UnsupportedClassException("Unsupported cache manager type: " + managerType.name());    // $NON-NLS-1$
-            }
-            resolver.setBeanFactory(beanFactory);
+            ExpiryCacheResolver resolver = detectCacheResolver();
             beanRegistered = BeanFactoryWraps.registerSingletonBean(beanFactory, CacheExpiryAutoConfiguration.CACHE_RESOLVER, resolver);
             CacheExpiryProperties.CacheInterceptor interceptorProps = expiryProperties.getCacheInterceptor();
             if (BooleanUtils.isNotFalse(interceptorProps.getInjectCacheManager())) {
@@ -135,4 +115,18 @@ public class CacheExpiryResolverProcessor implements BeanFactoryAware, BeanPostP
         }
         return bean;
     }
+
+    @Nonnull
+    private ExpiryCacheResolver detectCacheResolver() {
+        CacheExpiryProperties.CacheResolver resolverProps = expiryProperties.getCacheResolver();
+        ExpiryCacheResolver resolver = switch (managerType) {
+            case CAFFEINE -> new CaffeineExpiryCacheResolver(cacheManager, BooleanUtils.isNotFalse(resolverProps.getDetectCacheNameResolver()));
+            case JCACHE -> new JcacheExpiryCacheResolver(cacheManager, BooleanUtils.isNotFalse(resolverProps.getDetectCacheNameResolver()));
+            case REDIS -> new RedisExpiryCacheResolver(cacheManager, BooleanUtils.isNotFalse(resolverProps.getDetectCacheNameResolver()));
+            default -> throw new UnsupportedClassException("Unsupported cache manager type: " + managerType.name());    // $NON-NLS-1$
+        };
+        resolver.setBeanFactory(beanFactory);
+        return resolver;
+    }
+
 }

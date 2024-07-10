@@ -18,8 +18,8 @@ package org.springframework.boot.autoconfigure.cache;
 
 
 import java.lang.reflect.InvocationTargetException;
-import javax.annotation.Nonnull;
-import javax.annotation.Nullable;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import org.apache.commons.lang3.reflect.MethodUtils;
 import org.springframework.data.redis.cache.RedisCacheConfiguration;
 

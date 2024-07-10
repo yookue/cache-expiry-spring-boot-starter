@@ -18,7 +18,7 @@ package com.yookue.springstarter.cacheexpiry.resolver;
 
 
 import java.util.Collection;
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import org.springframework.cache.interceptor.CacheOperationInvocationContext;
 
 

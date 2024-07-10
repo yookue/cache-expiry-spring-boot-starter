@@ -18,7 +18,6 @@ package com.yookue.springstarter.cacheexpiry.config;
 
 
 import java.util.Optional;
-import javax.annotation.Nonnull;
 import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration;
@@ -38,6 +37,7 @@ import com.yookue.springstarter.cacheexpiry.processor.CacheExpiryResolverProcess
 import com.yookue.springstarter.cacheexpiry.property.CacheExpiryProperties;
 import com.yookue.springstarter.cacheexpiry.resolver.CacheNameResolver;
 import com.yookue.springstarter.cacheexpiry.resolver.impl.TargetClassNameResolver;
+import jakarta.annotation.Nonnull;
 
 
 /**
@@ -45,7 +45,6 @@ import com.yookue.springstarter.cacheexpiry.resolver.impl.TargetClassNameResolve
  *
  * @author David Hsing
  * @see org.springframework.cache.annotation.AbstractCachingConfiguration
- * @see org.springframework.cache.annotation.CachingConfigurerSupport
  * @see org.springframework.cache.annotation.ProxyCachingConfiguration
  */
 @Configuration(proxyBeanMethods = false)
@@ -53,7 +52,7 @@ import com.yookue.springstarter.cacheexpiry.resolver.impl.TargetClassNameResolve
 @ConditionalOnClass(value = CacheManager.class)
 @ConditionalOnBean(value = CacheAspectSupport.class)
 @AutoConfigureAfter(value = CacheAutoConfiguration.class)
-@Import(value = {CacheExpiryAutoConfiguration.Entry.class, CacheExpiryAutoConfiguration.Caffeine.class, CacheExpiryAutoConfiguration.Ehcache.class, CacheExpiryAutoConfiguration.Jcache.class, CacheExpiryAutoConfiguration.Redis.class})
+@Import(value = {CacheExpiryAutoConfiguration.Entry.class, CacheExpiryAutoConfiguration.Caffeine.class, CacheExpiryAutoConfiguration.Jcache.class, CacheExpiryAutoConfiguration.Redis.class})
 public class CacheExpiryAutoConfiguration {
     public static final String PROPERTIES_PREFIX = "spring.cache-expiry";    // $NON-NLS-1$
     public static final String CACHE_MANAGER = "cacheExpiryCacheManager";    // $NON-NLS-1$
@@ -94,20 +93,6 @@ public class CacheExpiryAutoConfiguration {
 
 
     @Order(value = 2)
-    @ConditionalOnProperty(prefix = "spring.cache", name = "type", havingValue = "ehcache", matchIfMissing = true)
-    @ConditionalOnClass(name = "net.sf.ehcache.CacheManager")
-    static class Ehcache {
-        @Bean
-        @ConditionalOnMissingBean
-        public CacheExpiryResolverProcessor cacheExpiryResolverProcessor(@Nonnull CacheExpiryProperties properties) {
-            CacheExpiryResolverProcessor result = new CacheExpiryResolverProcessor(properties, CacheManagerType.EHCACHE);
-            Optional.ofNullable(properties.getCacheResolver().getProcessorOrder()).ifPresent(result::setOrder);
-            return result;
-        }
-    }
-
-
-    @Order(value = 3)
     @ConditionalOnProperty(prefix = "spring.cache", name = "type", havingValue = "jcache", matchIfMissing = true)
     @ConditionalOnClass(name = "javax.cache.CacheManager")
     static class Jcache {
@@ -121,7 +106,7 @@ public class CacheExpiryAutoConfiguration {
     }
 
 
-    @Order(value = 4)
+    @Order(value = 3)
     @ConditionalOnProperty(prefix = "spring.cache", name = "type", havingValue = "redis", matchIfMissing = true)
     @ConditionalOnClass(name = "org.springframework.data.redis.core.RedisOperations")
     static class Redis {

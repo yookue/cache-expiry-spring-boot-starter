@@ -1,5 +1,0 @@
-# Cache Expiry for Spring Boot Starter
-# Copyright (c) 2020 Yookue Ltd. All rights reserved.
-# https://yookue.com
-
-org.springframework.boot.autoconfigure.EnableAutoConfiguration = com.yookue.springstarter.cacheexpiry.config.CacheExpiryAutoConfiguration
