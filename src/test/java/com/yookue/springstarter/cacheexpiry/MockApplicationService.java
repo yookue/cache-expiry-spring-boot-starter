@@ -28,6 +28,7 @@ import com.yookue.springstarter.cacheexpiry.annotation.CacheExpiry;
 class MockApplicationService {
     @Cacheable(key = "'13800138000'")
     @CacheExpiry(ttl = 3, unit = ChronoUnit.MINUTES)
+    @SuppressWarnings("SpringCacheNamesInspection")
     public String generateCaptcha() {
         return RandomStringUtils.randomNumeric(6);
     }
