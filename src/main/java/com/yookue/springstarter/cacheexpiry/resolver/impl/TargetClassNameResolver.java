@@ -21,6 +21,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.cache.interceptor.CacheOperationInvocationContext;
 import org.springframework.util.CollectionUtils;
@@ -94,13 +95,13 @@ public class TargetClassNameResolver implements CacheNameResolver {
         Set<String> cacheNames = context.getOperation().getCacheNames();
         if (CollectionUtils.isEmpty(cacheNames)) {
             StringBuilder builder = new StringBuilder();
-            builder.append(namePrefix);
+            builder.append(StringUtils.defaultString(namePrefix));
             builder.append(clazzName);
             if (methodName) {
                 builder.append(indentMethodName ? CharVariantConst.COLON : CharVariantConst.DOT);
                 builder.append(context.getMethod().getName());
             }
-            builder.append(nameSuffix);
+            builder.append(StringUtils.defaultString(nameSuffix));
             return Collections.singleton(builder.toString());
         }
         if (!resolveSpelName) {
