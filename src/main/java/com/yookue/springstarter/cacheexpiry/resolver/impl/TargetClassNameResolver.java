@@ -21,8 +21,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 import java.util.stream.Collectors;
-import jakarta.annotation.Nonnull;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.cache.interceptor.CacheOperationInvocationContext;
 import org.springframework.util.CollectionUtils;
@@ -30,6 +28,7 @@ import com.yookue.commonplexus.javaseutil.constant.CharVariantConst;
 import com.yookue.commonplexus.javaseutil.util.StringUtilsWraps;
 import com.yookue.commonplexus.springutil.constant.SpringAttributeConst;
 import com.yookue.springstarter.cacheexpiry.resolver.CacheNameResolver;
+import jakarta.annotation.Nonnull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -50,6 +49,7 @@ import lombok.Setter;
 @SuppressWarnings("unused")
 public class TargetClassNameResolver implements CacheNameResolver {
     private boolean shortClassName = false;
+    private boolean methodName = false;
     private boolean indentMethodName = true;
     private boolean resolveSpelName = false;
     private String namePrefix;
@@ -59,13 +59,20 @@ public class TargetClassNameResolver implements CacheNameResolver {
         this.shortClassName = shortClassName;
     }
 
-    public TargetClassNameResolver(boolean shortClassName, boolean indentMethodName) {
+    public TargetClassNameResolver(boolean shortClassName, boolean methodName) {
         this.shortClassName = shortClassName;
+        this.methodName = methodName;
+    }
+
+    public TargetClassNameResolver(boolean shortClassName, boolean methodName, boolean indentMethodName) {
+        this.shortClassName = shortClassName;
+        this.methodName = methodName;
         this.indentMethodName = indentMethodName;
     }
 
-    public TargetClassNameResolver(boolean shortClassName, boolean indentMethodName, boolean resolveSpelName) {
+    public TargetClassNameResolver(boolean shortClassName, boolean methodName, boolean indentMethodName, boolean resolveSpelName) {
         this.shortClassName = shortClassName;
+        this.methodName = methodName;
         this.indentMethodName = indentMethodName;
         this.resolveSpelName = resolveSpelName;
     }
@@ -82,18 +89,25 @@ public class TargetClassNameResolver implements CacheNameResolver {
     @Override
     @SuppressWarnings({"JavadocDeclaration", "JavadocLinkAsPlainText"})
     public Collection<String> getCacheNames(@Nonnull CacheOperationInvocationContext<?> context) {
-        Class<?> targetClass = AopUtils.getTargetClass(context.getTarget());
-        String className = shortClassName ? targetClass.getSimpleName() : targetClass.getCanonicalName();
+        Class<?> targetClazz = AopUtils.getTargetClass(context.getTarget());
+        String clazzName = shortClassName ? targetClazz.getSimpleName() : targetClazz.getCanonicalName();
         Set<String> cacheNames = context.getOperation().getCacheNames();
         if (CollectionUtils.isEmpty(cacheNames)) {
-            String cacheName = StringUtils.join(namePrefix, className, (indentMethodName ? CharVariantConst.COLON : CharVariantConst.DOT), context.getMethod().getName(), nameSuffix);
-            return Collections.singleton(cacheName);
+            StringBuilder builder = new StringBuilder();
+            builder.append(namePrefix);
+            builder.append(clazzName);
+            if (methodName) {
+                builder.append(indentMethodName ? CharVariantConst.COLON : CharVariantConst.DOT);
+                builder.append(context.getMethod().getName());
+            }
+            builder.append(nameSuffix);
+            return Collections.singleton(builder.toString());
         }
         if (!resolveSpelName) {
             return cacheNames;
         }
         return cacheNames.stream().map(element -> {
-            String replaced = StringUtilsWraps.replaceAll(element, className, SpringAttributeConst.CACHE_ROOT_TARGET_CLASS, SpringAttributeConst.CACHE_TARGET_CLASS);
+            String replaced = StringUtilsWraps.replaceAll(element, clazzName, SpringAttributeConst.CACHE_ROOT_TARGET_CLASS, SpringAttributeConst.CACHE_TARGET_CLASS);
             replaced = StringUtilsWraps.replaceAll(replaced, context.getMethod().getName(), SpringAttributeConst.CACHE_ROOT_METHOD_NAME, SpringAttributeConst.CACHE_METHOD_NAME);
             return replaced;
         }).collect(Collectors.toSet());

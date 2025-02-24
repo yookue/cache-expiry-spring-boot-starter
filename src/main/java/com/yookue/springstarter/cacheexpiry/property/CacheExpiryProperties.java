@@ -165,6 +165,11 @@ public class CacheExpiryProperties implements Serializable {
         private Boolean shortClassName;
 
         /**
+         * Whether to use method name in the generated cache name or not
+         */
+        private Boolean methodName;
+
+        /**
          * Whether to indent method name in the generated cache name or not
          * <p>
          * For example, the cache name will be {@code DemoService:demoMethodName} if this is {@code true}, otherwise, it will be {@code DemoService.demoMethodName}

@@ -18,10 +18,10 @@ package com.yookue.springstarter.cacheexpiry.resolver.impl;
 
 
 import java.util.Collection;
-import jakarta.annotation.Nonnull;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.interceptor.AbstractCacheResolver;
 import org.springframework.cache.interceptor.CacheOperationInvocationContext;
+import jakarta.annotation.Nonnull;
 import lombok.Getter;
 
 
@@ -48,19 +48,24 @@ public class TargetClassCacheResolver extends AbstractCacheResolver {
         nameResolver = new TargetClassNameResolver(shortClassName);
     }
 
-    public TargetClassCacheResolver(@Nonnull CacheManager manager, boolean shortClassName, boolean indentMethodName) {
+    public TargetClassCacheResolver(@Nonnull CacheManager manager, boolean shortClassName, boolean methodName) {
         super(manager);
-        nameResolver = new TargetClassNameResolver(shortClassName, indentMethodName);
+        nameResolver = new TargetClassNameResolver(shortClassName, methodName);
     }
 
-    public TargetClassCacheResolver(@Nonnull CacheManager manager, boolean shortClassName, boolean indentMethodName, boolean resolveSpelName) {
+    public TargetClassCacheResolver(@Nonnull CacheManager manager, boolean shortClassName, boolean methodName, boolean indentMethodName) {
         super(manager);
-        nameResolver = new TargetClassNameResolver(shortClassName, indentMethodName, resolveSpelName);
+        nameResolver = new TargetClassNameResolver(shortClassName, methodName, indentMethodName);
     }
 
-    public TargetClassCacheResolver(@Nonnull CacheManager manager, boolean shortClassName, boolean indentMethodName, boolean resolveSpelName, String namePrefix, String nameSuffix) {
+    public TargetClassCacheResolver(@Nonnull CacheManager manager, boolean shortClassName, boolean methodName, boolean indentMethodName, boolean resolveSpelName) {
         super(manager);
-        nameResolver = new TargetClassNameResolver(shortClassName, indentMethodName, resolveSpelName, namePrefix, nameSuffix);
+        nameResolver = new TargetClassNameResolver(shortClassName, methodName, indentMethodName, resolveSpelName);
+    }
+
+    public TargetClassCacheResolver(@Nonnull CacheManager manager, boolean shortClassName, boolean methodName, boolean indentMethodName, boolean resolveSpelName, String namePrefix, String nameSuffix) {
+        super(manager);
+        nameResolver = new TargetClassNameResolver(shortClassName, methodName, indentMethodName, resolveSpelName, namePrefix, nameSuffix);
     }
 
     @Override

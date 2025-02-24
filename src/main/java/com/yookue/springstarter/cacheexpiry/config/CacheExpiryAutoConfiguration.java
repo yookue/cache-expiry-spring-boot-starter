@@ -77,6 +77,7 @@ public class CacheExpiryAutoConfiguration {
             CacheExpiryProperties.CacheNameResolver props = properties.getCacheNameResolver();
             TargetClassNameResolver result = new TargetClassNameResolver();
             result.setShortClassName(BooleanUtils.isTrue(props.getShortClassName()));
+            result.setMethodName(BooleanUtils.isTrue(props.getMethodName()));
             result.setIndentMethodName(BooleanUtils.isTrue(props.getIndentMethodName()));
             result.setResolveSpelName(BooleanUtils.isTrue(props.getResolveSpelName()));
             result.setNamePrefix(props.getNamePrefix());
