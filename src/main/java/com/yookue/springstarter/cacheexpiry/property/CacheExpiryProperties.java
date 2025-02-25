@@ -102,7 +102,7 @@ public class CacheExpiryProperties implements Serializable {
          * <ol>
          *     <li>Defines a {@link org.springframework.cache.CacheManager} bean and records it's bean name to {@code cacheManagerName}</li>
          *     <li>Defines a {@link org.springframework.cache.CacheManager} bean and specifies it's bean name with {@code "cacheExpiryCacheManager"}, leave {@code cacheManagerName} blank</li>
-         *     <li>Auto detection. This starter finds the first priority bean of {@link org.springframework.cache.CacheManager}</li>
+         *     <li>Auto-detection. This starter finds the first priority bean of {@link org.springframework.cache.CacheManager}</li>
          * </ol>
          */
         private String cacheManagerName;
