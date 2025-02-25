@@ -37,10 +37,10 @@ import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.CollectionUtils;
 import com.github.benmanes.caffeine.cache.Caffeine;
+import com.yookue.commonplexus.springutil.util.CacheUtilsWraps;
 import com.yookue.commonplexus.springutil.util.ReflectionUtilsWraps;
 import com.yookue.springstarter.cacheexpiry.resolver.ExpiryCacheResolver;
 import com.yookue.springstarter.cacheexpiry.util.CacheExpiryDetectionUtils;
-import com.yookue.springstarter.cacheexpiry.util.CacheOperationContextUtils;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
@@ -75,11 +75,11 @@ public class CaffeineExpiryCacheResolver extends SimpleCacheResolver implements 
     @SneakyThrows
     @SuppressWarnings("unchecked")
     public Collection<? extends Cache> resolveCaches(@Nonnull CacheOperationInvocationContext<?> context) {
-        CacheResolver cacheResolver = CacheOperationContextUtils.getCacheResolver(beanFactory, context);
+        CacheResolver cacheResolver = CacheUtilsWraps.getCacheResolver(beanFactory, context);
         if (cacheResolver != null && !ClassUtils.isAssignableValue(getClass(), cacheResolver)) {
             return cacheResolver.resolveCaches(context);
         }
-        CacheManager cacheManager = ObjectUtils.defaultIfNull(CacheOperationContextUtils.getCacheManager(beanFactory, context), super.getCacheManager());
+        CacheManager cacheManager = ObjectUtils.defaultIfNull(CacheUtilsWraps.getCacheManager(beanFactory, context), super.getCacheManager());
         Assert.isInstanceOf(CaffeineCacheManager.class, cacheManager, "Cache manager must be an instanceof " + CaffeineCacheManager.class.getCanonicalName());
         // Prepare caches and configuration
         Collection<String> cacheNames = CacheExpiryDetectionUtils.detectCacheNames(context, beanFactory, detectNameResolver);

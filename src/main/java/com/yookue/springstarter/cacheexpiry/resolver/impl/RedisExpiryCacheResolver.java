@@ -21,7 +21,6 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
-import jakarta.annotation.Nonnull;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
@@ -38,10 +37,11 @@ import org.springframework.data.redis.cache.RedisCacheManager;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.CollectionUtils;
+import com.yookue.commonplexus.springutil.util.CacheUtilsWraps;
 import com.yookue.commonplexus.springutil.util.ReflectionUtilsWraps;
 import com.yookue.springstarter.cacheexpiry.resolver.ExpiryCacheResolver;
 import com.yookue.springstarter.cacheexpiry.util.CacheExpiryDetectionUtils;
-import com.yookue.springstarter.cacheexpiry.util.CacheOperationContextUtils;
+import jakarta.annotation.Nonnull;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
@@ -80,11 +80,11 @@ public class RedisExpiryCacheResolver extends SimpleCacheResolver implements Bea
     @Override
     @SneakyThrows
     public Collection<? extends Cache> resolveCaches(@Nonnull CacheOperationInvocationContext<?> context) {
-        CacheResolver cacheResolver = CacheOperationContextUtils.getCacheResolver(beanFactory, context);
+        CacheResolver cacheResolver = CacheUtilsWraps.getCacheResolver(beanFactory, context);
         if (cacheResolver != null && !ClassUtils.isAssignableValue(getClass(), cacheResolver)) {
             return cacheResolver.resolveCaches(context);
         }
-        CacheManager cacheManager = ObjectUtils.defaultIfNull(CacheOperationContextUtils.getCacheManager(beanFactory, context), super.getCacheManager());
+        CacheManager cacheManager = ObjectUtils.defaultIfNull(CacheUtilsWraps.getCacheManager(beanFactory, context), super.getCacheManager());
         Assert.isInstanceOf(RedisCacheManager.class, cacheManager, "Cache manager must be an instanceof " + RedisCacheManager.class.getCanonicalName());
         // Prepare caches and configuration
         Collection<String> cacheNames = CacheExpiryDetectionUtils.detectCacheNames(context, beanFactory, detectNameResolver);

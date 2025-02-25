@@ -22,8 +22,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.concurrent.TimeUnit;
-import jakarta.annotation.Nonnull;
-import jakarta.annotation.Nullable;
 import javax.cache.configuration.Configuration;
 import javax.cache.configuration.MutableConfiguration;
 import javax.cache.expiry.CreatedExpiryPolicy;
@@ -42,9 +40,11 @@ import org.springframework.cache.jcache.JCacheCacheManager;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.CollectionUtils;
+import com.yookue.commonplexus.springutil.util.CacheUtilsWraps;
 import com.yookue.springstarter.cacheexpiry.resolver.ExpiryCacheResolver;
 import com.yookue.springstarter.cacheexpiry.util.CacheExpiryDetectionUtils;
-import com.yookue.springstarter.cacheexpiry.util.CacheOperationContextUtils;
+import jakarta.annotation.Nonnull;
+import jakarta.annotation.Nullable;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
@@ -88,11 +88,11 @@ public class JcacheExpiryCacheResolver extends SimpleCacheResolver implements Be
     @SneakyThrows
     @SuppressWarnings("unchecked")
     public Collection<? extends Cache> resolveCaches(@Nonnull CacheOperationInvocationContext<?> context) {
-        CacheResolver cacheResolver = CacheOperationContextUtils.getCacheResolver(beanFactory, context);
+        CacheResolver cacheResolver = CacheUtilsWraps.getCacheResolver(beanFactory, context);
         if (cacheResolver != null && !ClassUtils.isAssignableValue(getClass(), cacheResolver)) {
             return cacheResolver.resolveCaches(context);
         }
-        CacheManager facadeCacheManager = ObjectUtils.defaultIfNull(CacheOperationContextUtils.getCacheManager(beanFactory, context), super.getCacheManager());
+        CacheManager facadeCacheManager = ObjectUtils.defaultIfNull(CacheUtilsWraps.getCacheManager(beanFactory, context), super.getCacheManager());
         Assert.isInstanceOf(JCacheCacheManager.class, facadeCacheManager, "Cache manager must be an instanceof " + JCacheCacheManager.class.getCanonicalName());
         javax.cache.CacheManager originCacheManager = ((JCacheCacheManager) facadeCacheManager).getCacheManager();
         Assert.notNull(originCacheManager, "Cache manager for '" + ClassUtils.getQualifiedMethodName(context.getMethod()) + "' must not be null");
