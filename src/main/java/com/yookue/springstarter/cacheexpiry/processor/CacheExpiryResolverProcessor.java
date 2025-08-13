@@ -17,6 +17,7 @@
 package com.yookue.springstarter.cacheexpiry.processor;
 
 
+import jakarta.annotation.Nonnull;
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeansException;
@@ -41,7 +42,6 @@ import com.yookue.springstarter.cacheexpiry.resolver.ExpiryCacheResolver;
 import com.yookue.springstarter.cacheexpiry.resolver.impl.CaffeineExpiryCacheResolver;
 import com.yookue.springstarter.cacheexpiry.resolver.impl.JcacheExpiryCacheResolver;
 import com.yookue.springstarter.cacheexpiry.resolver.impl.RedisExpiryCacheResolver;
-import jakarta.annotation.Nonnull;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;

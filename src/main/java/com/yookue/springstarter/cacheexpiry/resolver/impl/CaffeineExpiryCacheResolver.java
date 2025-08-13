@@ -73,7 +73,7 @@ public class CaffeineExpiryCacheResolver extends SimpleCacheResolver implements 
     @Nonnull
     @Override
     @SneakyThrows
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings({"unchecked", "NullableProblems"})
     public Collection<? extends Cache> resolveCaches(@Nonnull CacheOperationInvocationContext<?> context) {
         CacheResolver cacheResolver = CacheUtilsWraps.getCacheResolver(beanFactory, context);
         if (cacheResolver != null && !ClassUtils.isAssignableValue(getClass(), cacheResolver)) {
@@ -86,7 +86,7 @@ public class CaffeineExpiryCacheResolver extends SimpleCacheResolver implements 
         if (CollectionUtils.isEmpty(cacheNames)) {
             return Collections.emptyList();
         }
-        Caffeine<Object, Object> cacheBuilder = ReflectionUtilsWraps.getFieldAs(cacheManager.getClass(), "cacheBuilder", true, cacheManager, Caffeine.class);    // $NON-NLS-1$
+        Caffeine<Object, Object> cacheBuilder = ReflectionUtilsWraps.getFieldAs(cacheManager, "cacheBuilder", true, Caffeine.class);    // $NON-NLS-1$
         cacheBuilder = ObjectUtils.defaultIfNull(cacheBuilder, Caffeine.newBuilder());
         Duration duration = CacheExpiryDetectionUtils.detectCachePeriod(context);
         if (duration != null) {

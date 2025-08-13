@@ -18,6 +18,7 @@ package com.yookue.springstarter.cacheexpiry.config;
 
 
 import java.util.Optional;
+import jakarta.annotation.Nonnull;
 import org.apache.commons.lang3.BooleanUtils;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
@@ -38,7 +39,6 @@ import com.yookue.springstarter.cacheexpiry.processor.CacheExpiryResolverProcess
 import com.yookue.springstarter.cacheexpiry.property.CacheExpiryProperties;
 import com.yookue.springstarter.cacheexpiry.resolver.CacheNameResolver;
 import com.yookue.springstarter.cacheexpiry.resolver.impl.TargetClassNameResolver;
-import jakarta.annotation.Nonnull;
 
 
 /**

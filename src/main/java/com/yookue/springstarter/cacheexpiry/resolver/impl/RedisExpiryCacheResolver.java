@@ -21,6 +21,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import jakarta.annotation.Nonnull;
 import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
@@ -41,7 +42,6 @@ import com.yookue.commonplexus.springutil.util.CacheUtilsWraps;
 import com.yookue.commonplexus.springutil.util.ReflectionUtilsWraps;
 import com.yookue.springstarter.cacheexpiry.resolver.ExpiryCacheResolver;
 import com.yookue.springstarter.cacheexpiry.util.CacheExpiryDetectionUtils;
-import jakarta.annotation.Nonnull;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;
@@ -91,7 +91,7 @@ public class RedisExpiryCacheResolver extends SimpleCacheResolver implements Bea
         if (CollectionUtils.isEmpty(cacheNames)) {
             return Collections.emptyList();
         }
-        RedisCacheConfiguration configuration = ReflectionUtilsWraps.getFieldAs(cacheManager.getClass(), "defaultCacheConfig", true, cacheManager, RedisCacheConfiguration.class);    // $NON-NLS-1$
+        RedisCacheConfiguration configuration = ReflectionUtilsWraps.getFieldAs(cacheManager, "defaultCacheConfig", true, RedisCacheConfiguration.class);    // $NON-NLS-1$
         configuration = ObjectUtils.defaultIfNull(configuration, RedisCacheConfiguration.defaultCacheConfig());
         Duration duration = CacheExpiryDetectionUtils.detectCachePeriod(context);
         if (duration != null) {
