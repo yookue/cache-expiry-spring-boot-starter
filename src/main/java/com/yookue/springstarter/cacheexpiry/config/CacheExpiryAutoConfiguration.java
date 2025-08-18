@@ -24,6 +24,7 @@ import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.cache.CacheAutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBooleanProperty;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -49,7 +50,7 @@ import com.yookue.springstarter.cacheexpiry.resolver.impl.TargetClassNameResolve
  * @see org.springframework.cache.annotation.ProxyCachingConfiguration
  */
 @Configuration(proxyBeanMethods = false)
-@ConditionalOnProperty(prefix = CacheExpiryAutoConfiguration.PROPERTIES_PREFIX, name = "enabled", havingValue = "true", matchIfMissing = true)
+@ConditionalOnBooleanProperty(prefix = CacheExpiryAutoConfiguration.PROPERTIES_PREFIX, name = "enabled", matchIfMissing = true)
 @ConditionalOnClass(value = CacheManager.class)
 @ConditionalOnBean(value = CacheAspectSupport.class)
 @AutoConfigureAfter(value = CacheAutoConfiguration.class)
@@ -71,7 +72,7 @@ public class CacheExpiryAutoConfiguration {
         }
 
         @Bean
-        @ConditionalOnProperty(prefix = PROPERTIES_PREFIX + ".cache-name-resolver", name = "enabled", havingValue = "true", matchIfMissing = true)
+        @ConditionalOnBooleanProperty(prefix = PROPERTIES_PREFIX + ".cache-name-resolver", name = "enabled", matchIfMissing = true)
         @ConditionalOnMissingBean
         public CacheNameResolver targetClassNameResolver(@Nonnull CacheExpiryProperties properties) {
             CacheExpiryProperties.CacheNameResolver props = properties.getCacheNameResolver();
