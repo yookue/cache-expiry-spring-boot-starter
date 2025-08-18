@@ -66,7 +66,6 @@ public class CacheExpiryAutoConfiguration {
     static class Entry {
         @Bean
         @ConditionalOnMissingBean
-        @Role(value = BeanDefinition.ROLE_INFRASTRUCTURE)
         public CacheExpiryProperties cacheExpiryProperties() {
             return new CacheExpiryProperties();
         }
