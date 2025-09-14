@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2020 Unikue Ltd. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.yookue.springstarter.cacheexpiry.util;
+package cn.unikue.springstarter.cacheexpiry.util;
 
 
 import java.lang.reflect.Method;
@@ -29,10 +29,10 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.cache.interceptor.CacheOperationInvocationContext;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.CollectionUtils;
-import com.yookue.commonplexus.springutil.util.BeanFactoryWraps;
-import com.yookue.springstarter.cacheexpiry.annotation.CacheExpiry;
-import com.yookue.springstarter.cacheexpiry.annotation.CacheExpiryConfig;
-import com.yookue.springstarter.cacheexpiry.resolver.CacheNameResolver;
+import cn.unikue.commonplexus.springutil.util.BeanFactoryWraps;
+import cn.unikue.springstarter.cacheexpiry.annotation.CacheExpiry;
+import cn.unikue.springstarter.cacheexpiry.annotation.CacheExpiryConfig;
+import cn.unikue.springstarter.cacheexpiry.resolver.CacheNameResolver;
 
 
 /**

@@ -1,6 +1,6 @@
 Cache Expiry for Spring Boot Starter
-Copyright (c) 2020 Yookue Ltd. All rights reserved.
-https://yookue.com
+Copyright (c) 2020 Unikue Ltd. All rights reserved.
+https://unikue.cn
 
 This product is licensed to you under the Apache License, Version 2.0
 (the "License"). You may not use this product except in compliance with

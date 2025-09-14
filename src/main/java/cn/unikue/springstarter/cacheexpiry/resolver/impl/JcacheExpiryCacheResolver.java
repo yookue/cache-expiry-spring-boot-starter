@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2020 Unikue Ltd. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.yookue.springstarter.cacheexpiry.resolver.impl;
+package cn.unikue.springstarter.cacheexpiry.resolver.impl;
 
 
 import java.time.Duration;
@@ -42,9 +42,9 @@ import org.springframework.cache.jcache.JCacheCacheManager;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
 import org.springframework.util.CollectionUtils;
-import com.yookue.commonplexus.springutil.util.CacheUtilsWraps;
-import com.yookue.springstarter.cacheexpiry.resolver.ExpiryCacheResolver;
-import com.yookue.springstarter.cacheexpiry.util.CacheExpiryDetectionUtils;
+import cn.unikue.commonplexus.springutil.util.CacheUtilsWraps;
+import cn.unikue.springstarter.cacheexpiry.resolver.ExpiryCacheResolver;
+import cn.unikue.springstarter.cacheexpiry.util.CacheExpiryDetectionUtils;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.SneakyThrows;

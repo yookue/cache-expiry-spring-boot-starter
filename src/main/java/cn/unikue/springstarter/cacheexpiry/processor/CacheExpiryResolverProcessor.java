@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2020 Unikue Ltd. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.yookue.springstarter.cacheexpiry.processor;
+package cn.unikue.springstarter.cacheexpiry.processor;
 
 
 import jakarta.annotation.Nonnull;
@@ -31,17 +31,17 @@ import org.springframework.cache.interceptor.CacheInterceptor;
 import org.springframework.core.Ordered;
 import org.springframework.util.Assert;
 import org.springframework.util.ClassUtils;
-import com.yookue.commonplexus.javaseutil.constant.AssertMessageConst;
-import com.yookue.commonplexus.javaseutil.exception.UnsupportedClassException;
-import com.yookue.commonplexus.springutil.enumeration.CacheManagerType;
-import com.yookue.commonplexus.springutil.util.BeanFactoryWraps;
-import com.yookue.commonplexus.springutil.util.ClassUtilsWraps;
-import com.yookue.springstarter.cacheexpiry.config.CacheExpiryAutoConfiguration;
-import com.yookue.springstarter.cacheexpiry.property.CacheExpiryProperties;
-import com.yookue.springstarter.cacheexpiry.resolver.ExpiryCacheResolver;
-import com.yookue.springstarter.cacheexpiry.resolver.impl.CaffeineExpiryCacheResolver;
-import com.yookue.springstarter.cacheexpiry.resolver.impl.JcacheExpiryCacheResolver;
-import com.yookue.springstarter.cacheexpiry.resolver.impl.RedisExpiryCacheResolver;
+import cn.unikue.commonplexus.javaseutil.constant.AssertMessageConst;
+import cn.unikue.commonplexus.javaseutil.exception.UnsupportedClassException;
+import cn.unikue.commonplexus.springutil.enumeration.CacheManagerType;
+import cn.unikue.commonplexus.springutil.util.BeanFactoryWraps;
+import cn.unikue.commonplexus.springutil.util.ClassUtilsWraps;
+import cn.unikue.springstarter.cacheexpiry.config.CacheExpiryAutoConfiguration;
+import cn.unikue.springstarter.cacheexpiry.property.CacheExpiryProperties;
+import cn.unikue.springstarter.cacheexpiry.resolver.ExpiryCacheResolver;
+import cn.unikue.springstarter.cacheexpiry.resolver.impl.CaffeineExpiryCacheResolver;
+import cn.unikue.springstarter.cacheexpiry.resolver.impl.JcacheExpiryCacheResolver;
+import cn.unikue.springstarter.cacheexpiry.resolver.impl.RedisExpiryCacheResolver;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2020 Unikue Ltd. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package com.yookue.springstarter.cacheexpiry;
+package cn.unikue.springstarter.cacheexpiry;
 
 
 import java.time.temporal.ChronoUnit;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import com.yookue.springstarter.cacheexpiry.annotation.CacheExpiry;
+import cn.unikue.springstarter.cacheexpiry.annotation.CacheExpiry;
 
 
 @Service

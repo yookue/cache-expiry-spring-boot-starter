@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2020 Unikue Ltd. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.yookue.springstarter.cacheexpiry.config;
+package cn.unikue.springstarter.cacheexpiry.config;
 
 
 import java.util.Optional;
@@ -35,11 +35,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Role;
 import org.springframework.core.annotation.Order;
-import com.yookue.commonplexus.springutil.enumeration.CacheManagerType;
-import com.yookue.springstarter.cacheexpiry.processor.CacheExpiryResolverProcessor;
-import com.yookue.springstarter.cacheexpiry.property.CacheExpiryProperties;
-import com.yookue.springstarter.cacheexpiry.resolver.CacheNameResolver;
-import com.yookue.springstarter.cacheexpiry.resolver.impl.TargetClassNameResolver;
+import cn.unikue.commonplexus.springutil.enumeration.CacheManagerType;
+import cn.unikue.springstarter.cacheexpiry.processor.CacheExpiryResolverProcessor;
+import cn.unikue.springstarter.cacheexpiry.property.CacheExpiryProperties;
+import cn.unikue.springstarter.cacheexpiry.resolver.CacheNameResolver;
+import cn.unikue.springstarter.cacheexpiry.resolver.impl.TargetClassNameResolver;
 
 
 /**

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2020 Unikue Ltd. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,19 +14,17 @@
  * limitations under the License.
  */
 
-package com.yookue.springstarter.cacheexpiry.resolver;
+package cn.unikue.springstarter.cacheexpiry;
 
 
-import java.util.Collection;
-import jakarta.annotation.Nonnull;
-import org.springframework.cache.interceptor.CacheOperationInvocationContext;
+import jakarta.annotation.Nullable;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
-/**
- * Generates cache names by invocation context
- *
- * @author David Hsing
- */
-public interface CacheNameResolver {
-    Collection<String> getCacheNames(@Nonnull CacheOperationInvocationContext<?> context);
+@SpringBootApplication
+class MockApplicationInitializer {
+    public static void main(@Nullable String[] args) {
+        SpringApplication.run(MockApplicationInitializer.class, args);
+    }
 }

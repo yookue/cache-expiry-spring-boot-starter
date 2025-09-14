@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2020 Unikue Ltd. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,19 @@
  * limitations under the License.
  */
 
-package com.yookue.springstarter.cacheexpiry.resolver;
+package cn.unikue.springstarter.cacheexpiry.resolver;
 
 
-import org.springframework.beans.factory.BeanFactoryAware;
-import org.springframework.cache.interceptor.CacheResolver;
+import java.util.Collection;
+import jakarta.annotation.Nonnull;
+import org.springframework.cache.interceptor.CacheOperationInvocationContext;
 
 
 /**
- * {@link org.springframework.cache.interceptor.CacheResolver} with expiry capable
+ * Generates cache names by invocation context
  *
  * @author David Hsing
- * @see org.springframework.cache.interceptor.CacheResolver
  */
-public interface ExpiryCacheResolver extends BeanFactoryAware, CacheResolver {
+public interface CacheNameResolver {
+    Collection<String> getCacheNames(@Nonnull CacheOperationInvocationContext<?> context);
 }

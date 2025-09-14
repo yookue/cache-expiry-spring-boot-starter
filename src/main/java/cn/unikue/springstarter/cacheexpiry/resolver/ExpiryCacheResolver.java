@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2020 Unikue Ltd. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,18 @@
  * limitations under the License.
  */
 
-package com.yookue.springstarter.cacheexpiry;
+package cn.unikue.springstarter.cacheexpiry.resolver;
 
 
-import jakarta.annotation.Nullable;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.beans.factory.BeanFactoryAware;
+import org.springframework.cache.interceptor.CacheResolver;
 
 
-@SpringBootApplication
-class MockApplicationInitializer {
-    public static void main(@Nullable String[] args) {
-        SpringApplication.run(MockApplicationInitializer.class, args);
-    }
+/**
+ * {@link org.springframework.cache.interceptor.CacheResolver} with expiry capable
+ *
+ * @author David Hsing
+ * @see org.springframework.cache.interceptor.CacheResolver
+ */
+public interface ExpiryCacheResolver extends BeanFactoryAware, CacheResolver {
 }

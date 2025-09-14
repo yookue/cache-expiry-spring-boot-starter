@@ -1,5 +1,5 @@
 # Cache Expiry for Spring Boot Starter
-# Copyright (c) 2020 Yookue Ltd. All rights reserved.
-# https://yookue.com
+# Copyright (c) 2020 Unikue Ltd. All rights reserved.
+# https://unikue.cn
 
-com.yookue.springstarter.cacheexpiry.config.CacheExpiryAutoConfiguration
+cn.unikue.springstarter.cacheexpiry.config.CacheExpiryAutoConfiguration

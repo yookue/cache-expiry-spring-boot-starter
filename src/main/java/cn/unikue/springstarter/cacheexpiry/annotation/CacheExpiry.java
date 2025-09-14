@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2020 Unikue Ltd. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.yookue.springstarter.cacheexpiry.annotation;
+package cn.unikue.springstarter.cacheexpiry.annotation;
 
 
 import java.lang.annotation.Documented;
@@ -66,7 +66,7 @@ public @interface CacheExpiry {
     /**
      * Returns the cache names if not specified on method
      * <p>
-     * Specifies the bean name which extended from {@link com.yookue.springstarter.cacheexpiry.resolver.CacheNameResolver}
+     * Specifies the bean name which extended from {@link cn.unikue.springstarter.cacheexpiry.resolver.CacheNameResolver}
      *
      * @return the cache names if not specified on method
      */

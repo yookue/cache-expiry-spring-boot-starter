@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2020 Yookue Ltd. All rights reserved.
+ * Copyright (c) 2020 Unikue Ltd. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package com.yookue.springstarter.cacheexpiry.property;
+package cn.unikue.springstarter.cacheexpiry.property;
 
 
 import java.io.Serializable;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.core.Ordered;
-import com.yookue.springstarter.cacheexpiry.config.CacheExpiryAutoConfiguration;
+import cn.unikue.springstarter.cacheexpiry.config.CacheExpiryAutoConfiguration;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -120,7 +120,7 @@ public class CacheExpiryProperties implements Serializable {
      * Properties for cache resolver
      *
      * @author David Hsing
-     * @see com.yookue.springstarter.cacheexpiry.resolver.ExpiryCacheResolver
+     * @see cn.unikue.springstarter.cacheexpiry.resolver.ExpiryCacheResolver
      */
     @Getter
     @Setter
@@ -146,7 +146,7 @@ public class CacheExpiryProperties implements Serializable {
      * Properties for cache name resolver
      *
      * @author David Hsing
-     * @see com.yookue.springstarter.cacheexpiry.resolver.CacheNameResolver
+     * @see cn.unikue.springstarter.cacheexpiry.resolver.CacheNameResolver
      */
     @Getter
     @Setter
